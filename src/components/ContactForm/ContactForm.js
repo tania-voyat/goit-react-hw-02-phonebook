@@ -1,24 +1,29 @@
 import React, { Component } from "react";
 import styles from "./ContactForm.module.css";
 
+const INITIAL_STATE = {
+  name: "",
+  number: "",
+};
+
 export default class ContactForm extends Component {
-  state = {
-    name: "",
-    number: "",
-  };
+  state = { ...INITIAL_STATE };
 
   handleInputChange = (e) => {
-    this.setState({ name: e.target.value });
+    const { value } = e.target;
+    this.setState({ name: value });
   };
 
   handleNumberChange = (e) => {
-    this.setState({ number: e.target.value });
+    const { value } = e.target;
+    this.setState({ number: value });
   };
 
   handleAddContact = () => {
-    if ((this.state.name, this.state.number) !== "") {
-      this.props.onAddContact(this.state.name, this.state.number);
-      this.setState({ name: "", number: "" });
+    const { name, number } = this.state;
+    if ((name, number) !== "") {
+      this.props.onAddContact(name, number);
+      this.setState({ ...INITIAL_STATE });
     }
   };
 
